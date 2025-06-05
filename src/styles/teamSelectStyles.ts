@@ -27,7 +27,6 @@ export const Background = styled.div`
     background-color: #D9D9D9;
     width: 100%;
     height: 100vh;
-    position: relative;
     padding: 6em 0;
     font-family: "Inter", sans-serif;
     font-weight: 300;
