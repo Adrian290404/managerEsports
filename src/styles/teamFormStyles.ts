@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface Button{
+    type: 'add' | 'remove' | 'navigate';
+}
+
 export const Background = styled.div`
     background-color: #D9D9D9;
     width: 100%;
@@ -27,6 +31,7 @@ export const FormContainer = styled.div`
 `;
 
 export const Content = styled.div`
+    position: relative ;
     border-radius: 2em;
     width: 20%;
     background-color: white;
@@ -36,13 +41,13 @@ export const Content = styled.div`
 export const Title = styled.h2`
     font-family: "Poppins", sans-serif;
     font-weight: 500;
-    padding-top: 1em;
+    padding-top: .5em;
 `;
 
 export const Label = styled.label`
     font-family: "Poppins", sans-serif;
     font-weight: 500;
-    font-size: 1.1em;
+    font-size: 1rem;
     color: #333;
     text-align: left;
     margin: .5em 0 0 1em;
@@ -52,13 +57,13 @@ export const Label = styled.label`
 export const Input = styled.input`
     font-family: "Inter", sans-serif;
     font-weight: 300;
+    font-size: 1rem;
     display: block;
     width: calc(100% - 2em);
     margin: 0 0 1em 1em;
     padding: 0.4em 0;
     border: none;
     border-bottom: 1px solid #000;
-    font-size: 1em;
     outline: none;
     background-color: transparent;
     transition: border-bottom-color 0.3s;
@@ -66,4 +71,23 @@ export const Input = styled.input`
     &:focus {
         border-bottom-color: #555;
     }
+`;
+
+export const ControlButtons = styled.div`
+    position: absolute;
+    top: 0;
+    right: 3em;
+`;
+
+export const Button = styled.button<Button>`
+    border: none;
+    background-color: ${({ type }) => 
+        type === 'add' ? 'green' :
+        type === 'remove' ? 'red' :
+        type === 'navigate' ? 'blue' : 'gray'
+    };
+    padding: .2em .4em;
+    margin-right: .4em;
+    border-radius: 0 0 1em 1em;
+    cursor: pointer;
 `;

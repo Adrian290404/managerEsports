@@ -1,6 +1,10 @@
 import React from 'react';
-import { Background, Content, FormContainer, Title, Label, Logo, Input } from '../styles/teamFormStyles';
+import { Background, Content, FormContainer, Title, Label, Logo, Input, ControlButtons, Button } from '../styles/teamFormStyles';
 import def from '../assets/default.png';
+import { MdPersonAdd } from "react-icons/md";
+import { MdPersonRemove } from "react-icons/md";
+import { MdNavigateBefore } from "react-icons/md";
+import { MdNavigateNext } from "react-icons/md";
 
 export const TeamFormPage: React.FC = () => {
 
@@ -8,6 +12,20 @@ export const TeamFormPage: React.FC = () => {
         <Logo src={def} alt="Logo" />
         <FormContainer>
             <Content>
+                <ControlButtons>
+                    <Button type="add">
+                        <MdPersonAdd size={20} />
+                    </Button>
+                    <Button type="remove">
+                        <MdPersonRemove size={20} />
+                    </Button>
+                    <Button type="navigate">
+                        <MdNavigateBefore size={20} />
+                    </Button>
+                    <Button type="navigate">
+                        <MdNavigateNext size={20} />
+                    </Button>
+                </ControlButtons>
                 <Title>Jugadores</Title>
                 <Label htmlFor="nombre">Nombre</Label>
                 <Input id="nombre" type="text" />
