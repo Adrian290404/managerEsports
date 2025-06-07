@@ -15,8 +15,8 @@ export const Background = styled.div`
 `;
 
 export const Logo = styled.img`
-    width: 180px;
-    height: 180px;
+    width: 140px;
+    height: 140px;
     background-color: white;
     cursor: pointer;
     border: 5px solid black;
@@ -30,10 +30,14 @@ export const FormContainer = styled.div`
     margin-top: 3em;
 `;
 
+export const Form = styled.div`
+    width: 20%;
+`
+
 export const Content = styled.div`
     position: relative ;
     border-radius: 2em;
-    width: 20%;
+    width: 100%;
     background-color: white;
     padding: 1em;
 `;
@@ -41,7 +45,7 @@ export const Content = styled.div`
 export const Title = styled.h2`
     font-family: "Poppins", sans-serif;
     font-weight: 500;
-    padding-top: .5em;
+    margin-bottom: 1em;
 `;
 
 export const Label = styled.label`
@@ -71,23 +75,54 @@ export const Input = styled.input`
     &:focus {
         border-bottom-color: #555;
     }
+
+    &[type="number"]::-webkit-outer-spin-button, &[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    &[type="number"] {
+        -moz-appearance: textfield;
+    }
 `;
 
 export const ControlButtons = styled.div`
-    position: absolute;
-    top: 0;
-    right: 3em;
+    text-align: right;
 `;
 
 export const Button = styled.button<Button>`
     border: none;
-    background-color: ${({ type }) => 
-        type === 'add' ? 'green' :
-        type === 'remove' ? 'red' :
-        type === 'navigate' ? 'blue' : 'gray'
+    background-color: transparent;
+    padding: .3em .4em;
+    margin-right: ${({ type }) =>
+        type === "remove" ? "1.2em" : ".4em"
     };
-    padding: .2em .4em;
-    margin-right: .4em;
-    border-radius: 0 0 1em 1em;
+    border-radius: 50%;
+    border: 2px solid ${({ type }) => 
+        type === "add" ? "#a8e6a1" :
+        type === "remove" ? "#f5a8a8" :
+        type === "navigate" && "#6c757d"
+    };
     cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover{
+        transform: translateY(-.3em);
+        background-color:rgb(231, 231, 231);
+    }
+`;
+
+export const Current = styled.h3`
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+`;
+
+export const FormHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: .4em 1em;
+`;
+
+export const FormFooter = styled.p`
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
 `;
