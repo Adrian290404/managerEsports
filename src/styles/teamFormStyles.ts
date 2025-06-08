@@ -4,6 +4,10 @@ interface Button{
     type: 'add' | 'remove' | 'navigate';
 }
 
+interface CurrentForm{
+    current: boolean;
+}
+
 export const Background = styled.div`
     background-color: #D9D9D9;
     width: 100%;
@@ -125,4 +129,10 @@ export const FormHeader = styled.div`
 export const FormFooter = styled.p`
     font-family: "Inter", sans-serif;
     font-weight: 500;
+`;
+
+export const Player = styled.div<CurrentForm>`
+    display: ${({ current }) => 
+        current === true ? "block" : "none"
+    };
 `;
