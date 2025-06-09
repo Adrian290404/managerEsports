@@ -1,43 +1,47 @@
-import { Input, Label, Player } from "../styles/teamFormStyles"
+import { Input, Label, Player } from "../styles/teamFormStyles";
 
-interface PlayerProps {
-  player: number;
-  current: boolean;
-  form: { [key: string]: string };
-  setForm: (form: { [key: string]: string }) => void;
+interface PlayerData {
+    name: string;
+    nickname: string;
+    epicname: string;
+    epicID: string;
+    steamID: string;
+    discordID: string;
+    peak: string;
 }
 
-export const PlayerForm: React.FC<PlayerProps> = ({ player, current, form, setForm }) => {
-    const change = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setForm({
-            ...form,
-            [name]: value,
-        });
-    };
+interface PlayerFormProps {
+    form: PlayerData;
+    setForm: (newForm: PlayerData) => void;
+}
 
-    return (
-        <Player current={current}>
-            <Label htmlFor={"nombre" + player}>Nombre</Label>
-            <Input id={"nombre" + player} name={`nombre${player}`} value={form[`nombre${player}`]} onChange={change} />
-            
-            <Label htmlFor={"nickname" + player}>Nickname</Label>
-            <Input id={"nickname" + player} name={`nickname${player}`} value={form[`nickname${player}`]} onChange={change} />
-            
-            <Label htmlFor={"epicname" + player}>Nombre epic</Label>
-            <Input id={"epicname" + player} name={`epicname${player}`} value={form[`epicname${player}`]} onChange={change} />
-            
-            <Label htmlFor={"epicID" + player}>Epic ID</Label>
-            <Input id={"epicID" + player} name={`epicID${player}`} value={form[`epicID${player}`]} onChange={change} />
-            
-            <Label htmlFor={"steamID" + player}>Steam ID</Label>
-            <Input id={"steamID" + player} name={`steamID${player}`} value={form[`steamID${player}`]} onChange={change} />
-            
-            <Label htmlFor={"discordID" + player}>Discord ID</Label>
-            <Input id={"discordID" + player} name={`discordID${player}`} value={form[`discordID${player}`]} onChange={change} />
-            
-            <Label htmlFor={"peak" + player}>Peak</Label>
-            <Input id={"peak" + player} name={`peak${player}`} type="number" value={form[`peak${player}`]} onChange={change} />
-        </Player>
-    );
+export const PlayerForm: React.FC<PlayerFormProps> = ({ form, setForm }) => {
+  const change = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <Player>
+      <Label htmlFor="name">Nombre</Label>
+      <Input id="name" name="name" value={form.name} onChange={change} />
+
+      <Label htmlFor="nickname">Nickname</Label>
+      <Input id="nickname" name="nickname" value={form.nickname} onChange={change} />
+
+      <Label htmlFor="epicname">Nombre Epic</Label>
+      <Input id="epicname" name="epicname" value={form.epicname} onChange={change} />
+
+      <Label htmlFor="epicID">Epic ID</Label>
+      <Input id="epicID" name="epicID" value={form.epicID} onChange={change} />
+
+      <Label htmlFor="steamID">Steam ID</Label>
+      <Input id="steamID" name="steamID" value={form.steamID} onChange={change} />
+
+      <Label htmlFor="discordID">Discord ID</Label>
+      <Input id="discordID" name="discordID" value={form.discordID} onChange={change} />
+
+      <Label htmlFor="peak">Peak</Label>
+      <Input id="peak" name="peak" type="number" value={form.peak} onChange={change} />
+    </Player>
+  );
 };

@@ -118,11 +118,39 @@ export const Button = styled.button<Button>`
 export const Current = styled.h3`
     font-family: "Poppins", sans-serif;
     font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    color: #000;
 `;
+
+export const CurrentSelect = styled.select`
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    color: #000;
+    text-align: left;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: none;
+    background-image: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    &:focus {
+        outline: none;
+        border: none;
+        box-shadow: none;
+    }
+`;
+
 
 export const FormHeader = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: .4em 1em;
 `;
 
@@ -131,8 +159,19 @@ export const FormFooter = styled.p`
     font-weight: 500;
 `;
 
-export const Player = styled.div<CurrentForm>`
-    display: ${({ current }) => 
-        current === true ? "block" : "none"
-    };
+export const Player = styled.div`
+
+`;
+
+export const UpControls = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+`;
+
+export const BackIcon = styled.img`
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
 `;
