@@ -4,6 +4,10 @@ interface Button{
     type: 'add' | 'remove' | 'navigate';
 }
 
+interface SelectColor{
+    selectColor: string;
+}
+
 export const Background = styled.div`
     background-color: #D9D9D9;
     width: 100%;
@@ -81,9 +85,6 @@ export const Input = styled.input`
     &[type="number"]::-webkit-outer-spin-button, &[type="number"]::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
-    }
-    &[type="number"] {
-        -moz-appearance: textfield;
     }
 `;
 
@@ -176,4 +177,25 @@ export const LogoContainer = styled.div`
 
 export const HiddenInput = styled.input`
     display: none;
+`;
+
+export const Select = styled.select<SelectColor>`
+    display: block;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    margin: 0 0 1em 1em;
+    padding: 0.3em;
+    border: 1px solid #666;
+    border-radius: 4px;
+    background-color: ${({ selectColor }) => 
+        selectColor
+    };
+    color: #FFFFFF;
+    font-weight: bold;
+    outline: none;
+    transition: border-color 0.2s;
+
+    &:focus {
+        border-color: #000;
+    }
 `;

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Background, Content, FormContainer, Title, Logo, ControlButtons, Button, Form, Current, FormHeader, FormFooter, CurrentSelect, UpControls, BackIcon, Label, Input, LogoContainer, HiddenInput } from '../styles/teamFormStyles';
+import { Background, Content, FormContainer, Title, Logo, ControlButtons, Button, Form, Current, FormHeader, FormFooter, UpControls, BackIcon, Label, Input, LogoContainer, HiddenInput, Select } from '../styles/teamFormStyles';
 import def from '../assets/default.png';
 import { MdPersonAdd } from "react-icons/md";
 import { MdPersonRemove } from "react-icons/md";
@@ -24,6 +24,11 @@ export const TeamFormPage: React.FC = () => {
     const [staff, setStaff] = useState(0);
     const [logoSrc, setLogoSrc] = useState(def);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const [navColor, setNavColor] = useState("#000000");
+
+    const handleColorChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setNavColor(e.target.value);
+    };
 
     const addPlayer = () => {
         if (playerForms.length < 4) {
@@ -177,14 +182,76 @@ export const TeamFormPage: React.FC = () => {
                         </FormHeader>
                         
                         <div>
+
                             <Label htmlFor="teamName">Nombre del equipo</Label>
                             <Input id="teamName" name="teamName"/>
+
+                            <Label htmlFor="navColor">Color del navegador</Label>
+                            <Select id="navColor" selectColor={navColor} value={navColor} onChange={handleColorChange}>
+                                {/* Rojos */}
+                                <option value="#B71C1C">Rojo Oscuro</option>
+                                <option value="#C62828">Rojo</option>
+                                <option value="#E53935">Rojo Brillante</option>
+                                <option value="#FFCDD2">Rosa Suave</option>
+
+                                {/* Naranjas */}
+                                <option value="#E65100">Naranja Oscuro</option>
+                                <option value="#F57C00">Naranja</option>
+                                <option value="#FF9800">Naranja Claro</option>
+                                <option value="#FFE0B2">Durazno</option>
+
+                                {/* Amarillos */}
+                                <option value="#F9A825">Ámbar</option>
+                                <option value="#FBC02D">Amarillo</option>
+                                <option value="#FFEB3B">Amarillo Claro</option>
+                                <option value="#FFF9C4">Maíz pálido</option>
+
+                                {/* Verdes */}
+                                <option value="#1B5E20">Verde Oscuro</option>
+                                <option value="#2E7D32">Verde Bosque</option>
+                                <option value="#4CAF50">Verde</option>
+                                <option value="#A5D6A7">Verde Suave</option>
+
+                                {/* Cian / Teal */}
+                                <option value="#004D40">Teal Oscuro</option>
+                                <option value="#00796B">Teal</option>
+                                <option value="#009688">Teal Claro</option>
+                                <option value="#B2DFDB">Menta</option>
+
+                                {/* Azules */}
+                                <option value="#0D47A1">Azul Marino</option>
+                                <option value="#1976D2">Azul</option>
+                                <option value="#2196F3">Azul Brillante</option>
+                                <option value="#BBDEFB">Azul Cielo</option>
+
+                                {/* Índigos y morados */}
+                                <option value="#311B92">Índigo Oscuro</option>
+                                <option value="#5E35B1">Índigo</option>
+                                <option value="#7E57C2">Morado Medio</option>
+                                <option value="#E1BEE7">Lavanda</option>
+
+                                {/* Grises y negros */}
+                                <option value="#424242">Gris Oscuro</option>
+                                <option value="#757575">Gris</option>
+                                <option value="#BDBDBD">Gris Claro</option>
+                                <option value="#212121">Negro</option>
+                                <option value="#FFFFFF">Blanco</option>
+
+                                {/* Marrones */}
+                                <option value="#3E2723">Marrón Oscuro</option>
+                                <option value="#6D4C41">Marrón</option>
+                                <option value="#A1887F">Topo</option>
+                            </Select>
+
                             <Label htmlFor="twitch">Twitch <FaTwitch size={15} color={"#9146FF"} /></Label>
                             <Input id="twitch" name="twitch"/>
+
                             <Label htmlFor="youtube">Youtube <FaYoutube size={15} color={"#FF0000"} /></Label>
                             <Input id="youtube" name="youtube"/>
+
                             <Label htmlFor="twitter">Twitter <FaTwitter size={15} color={"#1DA1F2"} /></Label>
                             <Input id="twitter" name="twitter"/>
+
                             <Label htmlFor="instagram">Instagram <FaInstagram size={15} color={"#C1358"} /></Label>
                             <Input id="instagram" name="instagram"/>
                         </div>
