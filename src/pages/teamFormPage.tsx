@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Background, Content, FormContainer, Title, Logo, ControlButtons, Button, Form, Current, FormHeader, FormFooter, CurrentSelect, UpControls, BackIcon } from '../styles/teamFormStyles';
+import React, { useRef, useState } from 'react';
+import { Background, Content, FormContainer, Title, Logo, ControlButtons, Button, Form, Current, FormHeader, FormFooter, CurrentSelect, UpControls, BackIcon, Label, Input, LogoContainer, HiddenInput } from '../styles/teamFormStyles';
 import def from '../assets/default.png';
 import { MdPersonAdd } from "react-icons/md";
 import { MdPersonRemove } from "react-icons/md";
 import { MdNavigateBefore } from "react-icons/md";
 import { MdNavigateNext } from "react-icons/md";
+import { FaInstagram, FaTwitch, FaTwitter, FaYoutube } from "react-icons/fa";
 import { PlayerForm } from '../components/playerForm';
 import { toast } from 'react-toastify';
 import { AddButton } from '../styles/teamSelectStyles';
@@ -21,6 +22,8 @@ export const TeamFormPage: React.FC = () => {
         [ { staffName: '', staffAge: '', staffEmail: '', staffTelephone: '', staffDiscordID: '' }, { staffName: '', staffAge: '', staffEmail: '', staffTelephone: '', staffDiscordID: '' }, { staffName: '', staffAge: '', staffEmail: '', staffTelephone: '', staffDiscordID: '' }]
     );
     const [staff, setStaff] = useState(0);
+    const [logoSrc, setLogoSrc] = useState(def);
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
 
     const addPlayer = () => {
         if (playerForms.length < 4) {
@@ -74,13 +77,37 @@ export const TeamFormPage: React.FC = () => {
         }
     };
 
+    const handleClick = () => {
+        fileInputRef.current?.click();
+    };
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onloadend = () => {
+        if (typeof reader.result === 'string') {
+            setLogoSrc(reader.result);
+        }
+        };
+        reader.readAsDataURL(file);
+    };
+
     return (
         <Background>
             <UpControls>
                 <Link to="/select-team">
                     <BackIcon src={back} alt="backIcon" />
                 </Link>
-                <Logo src={def} alt="Logo" />
+                <LogoContainer>
+                    <Logo src={logoSrc} alt="Logo del equipo" onClick={handleClick} />
+                    <HiddenInput
+                        type="file"
+                        accept="image/*"
+                        ref={fileInputRef}
+                        onChange={handleImageChange}
+                    />
+                </LogoContainer>
                 <AddButton>+</AddButton>
             </UpControls>
             <FormContainer>
@@ -130,18 +157,38 @@ export const TeamFormPage: React.FC = () => {
                         </FormHeader>
 
                         <StaffForm
-                          form={staffForms[staff]}
-                          setForm={updated => {
-                            setStaffForms(forms =>
-                              forms.map((f,i) => i === staff ? updated : f)
-                            );
-                          }}
+                            form={staffForms[staff]}
+                            setForm={updated => {
+                                setStaffForms(forms =>
+                                    forms.map((f,i) => i === staff ? updated : f)
+                                );
+                            }}
                         />
                        
                     </Content> 
                 </Form>
                 <Form>
-                    <Content>Formulario 3 aquí</Content>
+                    <Title>Equipo</Title>
+                    <Content>
+                        <FormHeader>
+                            <Current>
+                                Información del equipo
+                            </Current>
+                        </FormHeader>
+                        
+                        <div>
+                            <Label htmlFor="teamName">Nombre del equipo</Label>
+                            <Input id="teamName" name="teamName"/>
+                            <Label htmlFor="twitch">Twitch <FaTwitch size={15} color={"#9146FF"} /></Label>
+                            <Input id="twitch" name="twitch"/>
+                            <Label htmlFor="youtube">Youtube <FaYoutube size={15} color={"#FF0000"} /></Label>
+                            <Input id="youtube" name="youtube"/>
+                            <Label htmlFor="twitter">Twitter <FaTwitter size={15} color={"#1DA1F2"} /></Label>
+                            <Input id="twitter" name="twitter"/>
+                            <Label htmlFor="instagram">Instagram <FaInstagram size={15} color={"#C1358"} /></Label>
+                            <Input id="instagram" name="instagram"/>
+                        </div>
+                    </Content>
                 </Form>
             </FormContainer>
         </Background>

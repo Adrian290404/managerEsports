@@ -4,10 +4,6 @@ interface Button{
     type: 'add' | 'remove' | 'navigate';
 }
 
-interface CurrentForm{
-    current: boolean;
-}
-
 export const Background = styled.div`
     background-color: #D9D9D9;
     width: 100%;
@@ -21,7 +17,7 @@ export const Background = styled.div`
 export const Logo = styled.img`
     width: 140px;
     height: 140px;
-    background-color: white;
+
     cursor: pointer;
     border: 5px solid black;
     border-radius: 2em;
@@ -59,7 +55,9 @@ export const Label = styled.label`
     color: #333;
     text-align: left;
     margin: .5em 0 0 1em;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: .5em;
 `;
 
 export const Input = styled.input`
@@ -159,10 +157,6 @@ export const FormFooter = styled.p`
     font-weight: 500;
 `;
 
-export const Player = styled.div`
-
-`;
-
 export const UpControls = styled.div`
     display: flex;
     justify-content: center;
@@ -174,4 +168,12 @@ export const BackIcon = styled.img`
     width: 60px;
     height: 60px;
     cursor: pointer;
+`;
+
+export const LogoContainer = styled.div`
+    position: relative;
+`;
+
+export const HiddenInput = styled.input`
+    display: none;
 `;

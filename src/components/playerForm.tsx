@@ -1,4 +1,4 @@
-import { Input, Label, Player } from "../styles/teamFormStyles";
+import { Input, Label } from "../styles/teamFormStyles";
 
 export interface PlayerData {
     playerName: string;
@@ -21,7 +21,7 @@ export const PlayerForm: React.FC<PlayerFormProps> = ({ form, setForm }) => {
     };
 
     return (
-        <Player>
+        <div>
             <Label htmlFor="playerName">Nombre</Label>
             <Input id="playerName" name="playerName" value={form.playerName} onChange={change} />
 
@@ -42,6 +42,6 @@ export const PlayerForm: React.FC<PlayerFormProps> = ({ form, setForm }) => {
 
             <Label htmlFor="playerPeak">Peak</Label>
             <Input id="playerPeak" name="playerPeak" type="number" value={form.playerPeak} onChange={change} />
-        </Player>
+        </div>
     );
 };

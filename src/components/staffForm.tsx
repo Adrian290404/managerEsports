@@ -1,4 +1,4 @@
-import { Input, Label, Player } from "../styles/teamFormStyles";
+import { Input, Label } from "../styles/teamFormStyles";
 
 export interface StaffData {
     staffName: string;
@@ -19,7 +19,7 @@ export const StaffForm: React.FC<StaffFormProps> = ({ form, setForm }) => {
     };
 
     return (
-        <Player>
+        <div>
             <Label htmlFor="staffName">Nombre</Label>
             <Input id="staffName" name="staffName" value={form.staffName} onChange={change} />
 
@@ -34,6 +34,6 @@ export const StaffForm: React.FC<StaffFormProps> = ({ form, setForm }) => {
 
             <Label htmlFor="staffDiscordID">Discord ID</Label>
             <Input id="staffDiscordID" name="staffDiscordID" value={form.staffDiscordID} onChange={change} />
-        </Player>
+        </div>
     );
 };
