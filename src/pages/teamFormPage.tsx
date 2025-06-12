@@ -6,12 +6,12 @@ import { MdPersonRemove } from "react-icons/md";
 import { MdNavigateBefore } from "react-icons/md";
 import { MdNavigateNext } from "react-icons/md";
 import { FaInstagram, FaTwitch, FaTwitter, FaYoutube } from "react-icons/fa";
-import { PlayerForm } from '../components/playerForm';
+import { PlayerForm } from '../components/form/playerForm';
 import { toast } from 'react-toastify';
 import { AddButton } from '../styles/teamSelectStyles';
 import back from '../assets/Back.gif';
 import { Link } from 'react-router-dom';
-import { StaffForm } from '../components/staffForm';
+import { StaffForm } from '../components/form/staffForm';
 
 export const TeamFormPage: React.FC = () => {
     const [playerForms, setPlayerForms] = useState(
@@ -24,7 +24,7 @@ export const TeamFormPage: React.FC = () => {
     const [staff, setStaff] = useState(0);
     const [logoSrc, setLogoSrc] = useState(def);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const [navColor, setNavColor] = useState("#000000");
+    const [navColor, setNavColor] = useState("#B71C1C");
 
     const handleColorChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setNavColor(e.target.value);

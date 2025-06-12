@@ -27,7 +27,7 @@ export const Background = styled.div`
     background-color: #D9D9D9;
     width: 100%;
     height: 100vh;
-    padding: 6em 0;
+    padding: 6em 0 14em 0;
     font-family: "Inter", sans-serif;
     font-weight: 300;
     text-align: center;
@@ -60,5 +60,28 @@ export const AddButton = styled.button`
 
     &:active {
         background-color: #909090;
+    }
+`;
+
+export const CardContainer = styled.div`
+    width: 30%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4em;
+`;
+
+export const CardImage = styled.img`
+    width: 130px;
+    height: 130px;
+    background-color: #C2C2C2;
+    border-radius: 1.5em;
+    cursor: pointer;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.65);
     }
 `;

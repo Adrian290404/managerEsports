@@ -1,4 +1,4 @@
-import { Input, Label } from "../styles/teamFormStyles";
+import { Input, Label } from "../../styles/teamFormStyles";
 
 export interface PlayerData {
     playerName: string;
