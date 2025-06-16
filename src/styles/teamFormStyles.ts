@@ -11,7 +11,6 @@ interface SelectColor{
 export const Background = styled.div`
     background-color: #D9D9D9;
     width: 100%;
-    height: 100vh;
     padding: 2em 0;
     font-family: "Inter", sans-serif;
     font-weight: 300;
