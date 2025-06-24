@@ -21,6 +21,11 @@ export const TeamFormPage: React.FC = () => {
     const [logoSrc, setLogoSrc] = useState(def);
     const [logoFile, setLogoFile] = useState<File | null>(null);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const [teamName, setTeamName] = useState('');
+    const [twitch, setTwitch] = useState('');
+    const [youtube, setYoutube] = useState('');
+    const [instagram, setInstagram] = useState('');
+    const [twitter, setTwitter] = useState('');
     const [navColor, setNavColor] = useState("#B71C1C");
 
     const handleColorChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -35,7 +40,8 @@ export const TeamFormPage: React.FC = () => {
             ]);
             setCurrentPlayer(playerForms.length);
             toast.success("Nuevo formulario para jugador añadido.");
-        } else {
+        } 
+        else {
             toast.error("No puedes añadir más jugadores.");
         }
     };
@@ -46,7 +52,8 @@ export const TeamFormPage: React.FC = () => {
             setPlayerForms(updated);
             setCurrentPlayer(cp => Math.min(cp, updated.length - 1));
             toast.success("Último jugador eliminado.");
-        } else {
+        } 
+        else {
             toast.error("Siempre debe quedar al menos uno.");
         }
     };
@@ -88,20 +95,50 @@ export const TeamFormPage: React.FC = () => {
         setLogoFile(file);
     };
 
-    const handleUpload = async () => {
-        if (!logoFile) return;
-        const formData = new FormData();
-        formData.append("logo", logoFile);
+    const handleAdd = async () => {
+        if (!teamName.trim() || !logoFile) {
+            toast.error('Debes indicar nombre e imagen del equipo.');
+            return;
+        }
         try {
-            const res = await fetch("http://localhost/managerEsportsBack/uploadLogo.php", {
-            method: "POST",
-            body: formData
+            const formData = new FormData();
+            formData.append('logo', logoFile);
+            const upRes = await fetch('http://localhost/managerEsportsBack/uploadLogo.php', {
+                method: 'POST',
+                body: formData
+            });
+            const upData = await upRes.json();
+            if (upData.status !== 'success') {
+                toast.error('Error subiendo logo: ' + upData.message);
+                return;
+            }
+            const imageUrl = `http://localhost/managerEsportsBack/${upData.path}`;
+            const payload = {
+            team: {
+                name: teamName,
+                color: navColor,
+                image: imageUrl,
+                twitch,
+                youtube,
+                twitter,
+                instagram
+            }
+            };
+            const res = await fetch('http://localhost/managerEsportsBack/addTeam.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
             });
             const data = await res.json();
-            if (data.status === "success") toast.success("Logo subido: " + data.path);
-            else toast.error("Error: " + data.message);
-        } catch {
-            toast.error("Fallo en la petición");
+            if (data.status === 'success') {
+                toast.success('Equipo creado con ID ' + data.team_id);
+            } 
+            else {
+                toast.error('Error al crear equipo: ' + data.message);
+            }
+        } 
+        catch (e) {
+            toast.error('Error en la petición: ' + e);
         }
     };
 
@@ -120,7 +157,7 @@ export const TeamFormPage: React.FC = () => {
                         onChange={handleImageChange}
                     />
                 </LogoContainer>
-                <AddButton onClick={handleUpload}>+</AddButton>
+                <AddButton onClick={handleAdd}>+</AddButton>
             </UpControls>
             <FormContainer>
                 <Form>
@@ -178,7 +215,7 @@ export const TeamFormPage: React.FC = () => {
                         </FormHeader>
                         <div>
                             <Label htmlFor="teamName">Nombre del equipo</Label>
-                            <Input id="teamName" name="teamName" />
+                            <Input id="teamName" name="teamName" value={teamName} onChange={e => setTeamName(e.target.value)} />
                             <Label htmlFor="navColor">Color del navegador</Label>
                             <Select id="navColor" selectColor={navColor} value={navColor} onChange={handleColorChange}>
                                 <option value="#B71C1C">Rojo Oscuro</option>
@@ -219,13 +256,13 @@ export const TeamFormPage: React.FC = () => {
                                 <option value="#A1887F">Topo</option>
                             </Select>
                             <Label htmlFor="twitch">Twitch <FaTwitch size={15} color="#9146FF" /></Label>
-                            <Input id="twitch" name="twitch" />
+                            <Input id="twitch" name="twitch" value={twitch} onChange={e => setTwitch(e.target.value)} />
                             <Label htmlFor="youtube">Youtube <FaYoutube size={15} color="#FF0000" /></Label>
-                            <Input id="youtube" name="youtube" />
+                            <Input id="youtube" name="youtube" value={youtube} onChange={e => setYoutube(e.target.value)} />
                             <Label htmlFor="twitter">Twitter <FaTwitter size={15} color="#1DA1F2" /></Label>
-                            <Input id="twitter" name="twitter" />
+                            <Input id="twitter" name="twitter" value={twitter} onChange={e => setTwitter(e.target.value)} />
                             <Label htmlFor="instagram">Instagram <FaInstagram size={15} color="#C1358" /></Label>
-                            <Input id="instagram" name="instagram" />
+                            <Input id="instagram" name="instagram" value={instagram} onChange={e => setInstagram(e.target.value)} />
                         </div>
                     </Content>
                 </Form>

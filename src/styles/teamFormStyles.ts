@@ -34,7 +34,7 @@ export const FormContainer = styled.div`
 `;
 
 export const Form = styled.div`
-    width: 20%;
+    width: 28%;
 `
 
 export const Content = styled.div`
