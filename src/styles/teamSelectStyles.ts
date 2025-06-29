@@ -64,8 +64,8 @@ export const AddButton = styled.button`
 `;
 
 export const CardContainer = styled.div`
-    width: 30%;
-    margin: 0 auto;
+    width: 50%;
+    margin: 5em auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
