@@ -33,18 +33,19 @@ export const TeamSelectPage: React.FC = () => {
         <Background>
             <Title>
                 {teams.length !== 0
-                ? "Selecciona un equipo"
-                : "Aún no hay equipos registrados"}
+                    ? "Selecciona un equipo"
+                    : "Aún no hay equipos registrados"
+                }
             </Title>
 
             {teams.length !== 0 && (
                 <CardContainer>
                     {teams.map((team) => (
                         <TeamCard
-                        key={team.id}
-                        id={team.id}
-                        image={team.image}
-                        onClick={() => handleSelect(team.id)}
+                            key={team.id}
+                            id={team.id}
+                            image={team.image}
+                            onClick={() => handleSelect(team.id)}
                         />
                     ))}
                 </CardContainer>
