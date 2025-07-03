@@ -3,6 +3,7 @@ import { TeamSelectPage } from './pages/teamSelectPage';
 import { TeamFormPage } from './pages/teamFormPage';
 import { ToastContainer } from 'react-toastify';
 import { LayoutComponent } from './components/others/layoutComponent';
+import { TeamInformationPage } from './pages/teamInformationPage';
 
 function App() {
     return (
@@ -12,8 +13,8 @@ function App() {
                 <Route path="/select-team" element={<TeamSelectPage />} />
                 <Route path="/team-form" element={<TeamFormPage />} />
                 <Route path="/team" element={<LayoutComponent />}>
-                    {/* <Route index element={<BookingsListPage />} />
-                    <Route path="create" element={<BookingsCreatePage />} />
+                    <Route index element={<TeamInformationPage />} />
+                    {/* <Route path="create" element={<BookingsCreatePage />} />
                     <Route path=":id" element={<BookingsDetailsPage />} /> */}
                 </Route>
             </Routes>
