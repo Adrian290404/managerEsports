@@ -25,6 +25,7 @@ export const Logo = styled.img`
 export const Menu = styled.nav`
     display: flex;
     gap: 5rem;
+    align-items: center;
 `;
 
 export const MenuItem = styled.span`

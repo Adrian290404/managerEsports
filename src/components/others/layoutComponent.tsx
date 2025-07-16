@@ -42,8 +42,8 @@ export const LayoutComponent: React.FC = () => {
 
     return <>
         <Background palette={color}>
-            <Logo src={image != "" ? image : def} />
             <Menu>
+                <Logo src={image != "" ? image : def} />
                 <MenuItem>Contactos scrims</MenuItem>
                 <MenuItem>Entrenamientos</MenuItem>
                 <MenuItem>Torneos</MenuItem>
