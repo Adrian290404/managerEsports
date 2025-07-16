@@ -101,6 +101,8 @@ export const TeamFormPage: React.FC = () => {
             return;
         }
         try {
+
+            // Subida del logo
             const formData = new FormData();
             formData.append('logo', logoFile);
             const upRes = await fetch('http://localhost/managerEsportsBack/uploadLogo.php', {
@@ -113,29 +115,61 @@ export const TeamFormPage: React.FC = () => {
                 return;
             }
             const imageUrl = `http://localhost/managerEsportsBack/${upData.path}`;
-            const payload = {
-            team: {
-                name: teamName,
-                color: navColor,
-                image: imageUrl,
-                twitch,
-                youtube,
-                twitter,
-                instagram
-            }
+
+            // Subida de los datos del equipo
+            const teamPayload = {
+                team: {
+                    name: teamName,
+                    color: navColor,
+                    image: imageUrl,
+                    twitch,
+                    youtube,
+                    twitter,
+                    instagram
+                }
             };
-            const res = await fetch('http://localhost/managerEsportsBack/addTeam.php', {
+            const teamRes = await fetch('http://localhost/managerEsportsBack/addTeam.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(teamPayload)
             });
-            const data = await res.json();
-            if (data.status === 'success') {
-                toast.success('Equipo creado con ID ' + data.team_id);
+            const data = await teamRes.json();
+            if (data.status !== 'success') {
+                toast.error('Error al crear equipo: ' + data.message);
+                return;
+            }
+            const teamId = data.team_id;
+
+            // Subida de los jugadores
+            const playersPayload = {
+                players: playerForms.map(p => ({
+                    team_id: teamId,
+                    name:          p.playerName,
+                    nickname:      p.playerNickname,
+                    epicgames_name: p.playerEpicname,
+                    epicgames_id:   p.playerEpicID,
+                    steam_id:       p.playerSteamID,
+                    discord_id:     p.playerDiscordID,
+                    peak:           p.playerPeak
+                }))
+            };
+
+            const res = await fetch('http://localhost/managerEsportsBack/addPlayers.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(playersPayload)
+            });
+            const result = await res.json();
+            if (result.status === 'success') {
+                toast.success(`Insertados ${result.inserted} jugadores`);
+            } 
+            else if (result.status === 'partial') {
+                toast.warn(`Algunos fallaron:\n${result.errors.join('\n')}`);
             } 
             else {
-                toast.error('Error al crear equipo: ' + data.message);
+                toast.error(`Error al insertar jugadores: ${result.message}`);
             }
+            toast.success('Equipo y jugadores creados con éxito.');
         } 
         catch (e) {
             toast.error('Error en la petición: ' + e);
