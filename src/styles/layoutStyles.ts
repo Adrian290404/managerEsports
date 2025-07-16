@@ -45,9 +45,11 @@ export const LeftIcon = styled.div`
     color: #ffffff;
     font-size: 1.5rem;
     cursor: pointer;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
+    transform: scale(1);
 
     &:hover {
         opacity: 0.8;
+        transform: scale(1.2);
   }
 `;
